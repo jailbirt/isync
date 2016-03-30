@@ -33,13 +33,6 @@ WORKDIR /isync-1.2.1
 
 RUN ./configure && make && make install
 
-#RUN yum remove -y wget \
-#                  gcc \
-#                  zlib-devel \
-#                  openssl-devel \
-#                  cyrus-sasl-devel \
-#                  libdb-devel
-
 RUN yum remove -y wget \
                   gcc \
                   *-devel
