@@ -1,5 +1,7 @@
 FROM centos
 
+MAINTAINER bcouto@gmail.com
+
 RUN yum update -y
 
 RUN yum install -y wget \
@@ -31,15 +33,19 @@ WORKDIR /isync-1.2.1
 
 RUN ./configure && make && make install
 
+#RUN yum remove -y wget \
+#                  gcc \
+#                  zlib-devel \
+#                  openssl-devel \
+#                  cyrus-sasl-devel \
+#                  libdb-devel
+
 RUN yum remove -y wget \
                   gcc \
-                  zlib-devel \
-                  openssl-devel \
-                  cyrus-sasl-devel \
-                  libdb-devel
+                  *-devel
 
 RUN yum clean all
 
 WORKDIR /
 
-RUN rm -rf /isync-1.2.1 isync-1.2.1.tar.gz
+RUN rm -rf /isync-1.2.1 /isync-1.2.1.tar.gz
