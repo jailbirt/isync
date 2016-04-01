@@ -4,7 +4,7 @@ services:
     isync:
         image: bcouto/isync 
         environment:
-            - SYNC_INTERVAL=5
+            - SYNC_INTERVAL=300
             - SYNC_CONFIG=/mail/mbsync.conf
             - CHANNEL=work
         volumes:
