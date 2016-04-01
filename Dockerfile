@@ -4,7 +4,8 @@ MAINTAINER bcouto@gmail.com
 
 RUN yum update -y
 
-RUN yum install -y wget \
+RUN yum install -y cronie \ 
+                   wget \
                    gcc \
                    zlib \
                    zlib-devel \
@@ -42,3 +43,10 @@ RUN yum clean all
 WORKDIR /
 
 RUN rm -rf /isync-1.2.1 /isync-1.2.1.tar.gz
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod -v +x /docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["/usr/sbin/crond", "-n"]
