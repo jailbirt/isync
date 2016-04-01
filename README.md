@@ -25,7 +25,8 @@ isync website: http://isync.sourceforge.net/
 docker run \
     -ti \
     --rm \
-    -v /mail/:/mail/ bcouto/isync \
+    -v /mail/:/mail/ \
+    bcouto/isync \
     mbsync -c <config file (e.g. /mail/mbsync.conf)> <channel> 
 ```
 
@@ -34,9 +35,10 @@ docker run \
 docker run \
     -ti \
     --rm \
+    -d \
     -v /mail/:/mail/ \
     -e SYNC_INTERVAL=300 \
-    -e SYNC_CONFIG=/mail/mbsync.conf \
+    -e SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)> \
     -e CHANNEL=<channel> bcouto/isync
 ```
 
@@ -49,7 +51,7 @@ services:
         image: bcouto/isync
         environment:
             - SYNC_INTERVAL=300
-            - SYNC_CONFIG=/mail/mbsync.conf
+            - SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)>
             - CHANNEL=<channel>
         volumes:
             - /mail/:/mail/
