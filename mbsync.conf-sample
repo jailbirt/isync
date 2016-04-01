@@ -1,0 +1,28 @@
+IMAPAccount work
+Host outlook.office365.com
+Port 993
+User <email address>
+Pass <password>
+SSLType IMAPS
+SSLVersions SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+Path /mail/work/
+Inbox /mail/work/Inbox
+
+Channel work
+Master :work-remote:
+Slave :work-local:
+Patterns "INBOX"
+# Or include everything
+#Patterns "INBOX" "Drafts" "Deleted Items" "Sent Itens" "Junk Email"
+
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+Expunge Both
+
+# Save the synchronization state files in the relevant directory
+SyncState *

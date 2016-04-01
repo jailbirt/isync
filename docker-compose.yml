@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+    isync:
+        image: bcouto/isync 
+        environment:
+            - SYNC_INTERVAL=5
+            - SYNC_CONFIG=/mail/mbsync.conf
+            - CHANNEL=work
+        volumes:
+            - ./mail/:/mail/
