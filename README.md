@@ -1,7 +1,6 @@
 # Supported tags and respective ``Dockerfile`` links
 
-* [`latest`, `1.2.1-2.1` (docker/Dockerfile)](https://github.com/bcouto/isync/blob/master/Dockerfile)
-* [`1.2.1-1.0` (docker/Dockerfile)](https://github.com/bcouto/isync/blob/1.2.1-1.0/Dockerfile)
+* [`latest`, `1.2.1-2.2` (docker/Dockerfile)](https://github.com/bcouto/isync/blob/master/Dockerfile)
 
 # isync:
 A command line application which synchronizes mailboxes; currently Maildir and IMAP4 mailboxes are supported. New messages, message deletions and flag changes can be propagated both ways. isync is suitable for use in IMAP-disconnected mode.
@@ -26,7 +25,8 @@ isync website: http://isync.sourceforge.net/
 docker run \
     -ti \
     --rm \
-    -v /mail/:/mail/ bcouto/isync \
+    -v /mail/:/mail/ \
+    bcouto/isync \
     mbsync -c <config file (e.g. /mail/mbsync.conf)> <channel> 
 ```
 
@@ -35,11 +35,13 @@ docker run \
 docker run \
     -ti \
     --rm \
+    -d \
     -v /mail/:/mail/ \
     -e SYNC_INTERVAL=300 \
-    -e SYNC_CONFIG=/mail/mbsync.conf \
+    -e SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)> \
     -e CHANNEL=<channel> bcouto/isync
 ```
+
 docker-compose.yml:
 ```
 version: '2'
@@ -49,7 +51,7 @@ services:
         image: bcouto/isync
         environment:
             - SYNC_INTERVAL=300
-            - SYNC_CONFIG=/mail/mbsync.conf
+            - SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)>
             - CHANNEL=<channel>
         volumes:
             - /mail/:/mail/
