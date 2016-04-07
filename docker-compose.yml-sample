@@ -7,5 +7,7 @@ services:
             - SYNC_INTERVAL=300
             - SYNC_CONFIG=/mail/mbsync.conf
             - CHANNEL=work
+            - ISYNC_USER_GID=1000
+            - ISYNC_USER_UID=1000
         volumes:
-            - ./mail/:/mail/
+            - /mail/:/mail/
