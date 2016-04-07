@@ -38,6 +38,8 @@ docker run \
     -d \
     -v /mail/:/mail/ \
     -e SYNC_INTERVAL=300 \
+    -e ISYNC_USER_GID=1000 \
+    -e ISYNC_USER_UID=1000 \
     -e SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)> \
     -e CHANNEL=<channel> bcouto/isync
 ```
@@ -51,6 +53,8 @@ services:
         image: bcouto/isync
         environment:
             - SYNC_INTERVAL=300
+            - ISYNC_USER_GID=1000
+            - ISYNC_USER_UID=1000
             - SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)>
             - CHANNEL=<channel>
         volumes:

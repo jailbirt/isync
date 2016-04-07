@@ -5,9 +5,9 @@ services:
         image: bcouto/isync 
         environment:
             - SYNC_INTERVAL=300
-            - SYNC_CONFIG=/mail/mbsync.conf
-            - CHANNEL=work
             - ISYNC_USER_GID=1000
             - ISYNC_USER_UID=1000
+            - SYNC_CONFIG=/mail/mbsync.conf
+            - CHANNEL=work
         volumes:
             - /mail/:/mail/
