@@ -14,7 +14,7 @@ if [ ! -z "${ISYNC_USER_GID}" ] && [ ! -z "${ISYNC_USER_UID}" ]; then
     MAIL_FOLDER=$( grep "Path" ${SYNC_CONFIG} | cut -d " " -f 2 )
     mkdir -p ${MAIL_FOLDER}
     chown isync_user.isync_user_group -R ${MAIL_FOLDER}
-    chmod 744 ${MAIL_FOLDER}
+    chmod 755 ${MAIL_FOLDER}
 
     echo "* * * * * sleep ${SYNC_INTERVAL} && /usr/local/bin/mbsync -c ${SYNC_CONFIG} ${CHANNEL}" > /var/spool/cron/isync_user && \
     chown isync_user.isync_user_group /var/spool/cron/isync_user && \

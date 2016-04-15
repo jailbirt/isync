@@ -41,10 +41,12 @@ docker run \
     -e ISYNC_USER_GID=1000 \
     -e ISYNC_USER_UID=1000 \
     -e SYNC_CONFIG=<config file (e.g. /mail/mbsync.conf)> \
-    -e CHANNEL=<channel> bcouto/isync
+    -e CHANNEL=<channel> \
+    bcouto/isync
 ```
 
-docker-compose.yml:
+docker-compose.yml-sample:
+
 ```
 version: '2'
 
