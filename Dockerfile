@@ -1,30 +1,10 @@
-FROM centos
+FROM alpine
 
 MAINTAINER bcouto@gmail.com
 
-RUN yum update -y
-
-RUN yum install -y cronie \ 
-                   wget \
-                   gcc \
-                   zlib \
-                   zlib-devel \
-                   openssl \
-                   openssl-devel \
-                   openssl-libs \
-                   cyrus-sasl \
-                   cyrus-sasl-devel \
-                   cyrus-sasl-gs2 \
-                   cyrus-sasl-gssapi \
-                   cyrus-sasl-ldap \
-                   cyrus-sasl-lib \
-                   cyrus-sasl-md5 \
-                   cyrus-sasl-ntlm \
-                   cyrus-sasl-plain \
-                   cyrus-sasl-scram \
-                   cyrus-sasl-sql \
-                   libdb \
-                   libdb-devel
+RUN apk upgrade --no-cache
+RUN apk add --no-cache ca-certificates wget gcc make libc-dev zlib-dev \
+        openssl-dev cyrus-sasl-dev db-dev
 
 RUN wget http://netix.dl.sourceforge.net/project/isync/isync/1.2.1/isync-1.2.1.tar.gz
 
@@ -33,12 +13,6 @@ RUN tar xvfz isync-1.2.1.tar.gz
 WORKDIR /isync-1.2.1
 
 RUN ./configure && make && make install
-
-RUN yum remove -y wget \
-                  gcc \
-                  *-devel
-
-RUN yum clean all
 
 WORKDIR /
 
@@ -49,4 +23,4 @@ RUN chmod -v +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["/usr/sbin/crond", "-n"]
+CMD ["/usr/sbin/crond", "-f"]
