@@ -8,5 +8,8 @@ build-image:
 clean-images:
 	docker images -q -f "dangling=true" | xargs --no-run-if-empty docker rmi
 
+clean-volumes:
+	docker volume ls -q -f dangling=true | xargs --no-run-if-empty docker volume rm
+
 clean:
 	docker ps -q -f status=exited | xargs --no-run-if-empty docker rm
